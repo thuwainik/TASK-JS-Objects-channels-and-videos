@@ -9,12 +9,16 @@ const channels = require("./channels.json");
  ****************************************************************/
 function totalVideosDuration(channel) {
   // Your code here
-  // let sum = 0;
-  // channel.videos.forEach((e) => {
-  //   sum += e.duration;
-  // });
-  // return sum;
+  return channel.videos.reduce((i, j) => i + j.duration, 0);
 }
+// function totalVideosDuration(channel) {
+//   // Your code here
+//   let sum = 0;
+//   channel.videos.forEach((e) => {
+//     sum += e.duration;
+//   });
+//   return sum;
+// }
 
 /**************************************************************
  * channelWithMostContent(channels):
@@ -26,9 +30,9 @@ function totalVideosDuration(channel) {
  ****************************************************************/
 function channelWithMostContent(channels) {
   // Your code here
-  // const newArray = channels.filter((e) => totalVideosDuration(e));
-  // newArray.sort();
-  // return newArray;
+  return channels.sort(
+    (x, y) => totalVideosDuration(x) - totalVideosDuration(y)
+  )[channels.length - 1];
 }
 
 /**************************************************************
@@ -40,6 +44,9 @@ function channelWithMostContent(channels) {
  ****************************************************************/
 function longestChannelName(channels) {
   // Your code here
+  return channels.sort((x, y) => x.name.length - y.name.length)[
+    channels.length - 1
+  ];
 }
 
 // Check your answers by running this file and comparing what it logs
@@ -49,7 +56,7 @@ console.log(totalVideosDuration(channels[0]));
 
 // 636
 
-console.log(channelWithMostContent(channels));
+// console.log(channelWithMostContent(channels));
 // Should log:
 
 // {
